@@ -153,35 +153,6 @@ def main():
             print(f"      [Teleport] Switch error: {e}. Falling through to manual guidance.")
     
     if not teleport_succeeded:
-        connect_dir = os.path.join(AIM_ROOT, "continuity")
-        os.makedirs(connect_dir, exist_ok=True)
-        connect_path = os.path.join(connect_dir, "REINCARNATION_CONNECT.md")
-        instructions = f"""# Reincarnation Connect Instructions
-
-The new agent has been spawned in tmux session: **{session_name}**
-
-## To connect:
-
-**Option A — Attach directly via tmux:**
-```
-tmux attach-session -t {session_name}
-```
-
-**Option B — If opencode needs session selection:**
-After attaching via tmux, if opencode shows multiple sessions, use:
-```
-/session
-```
-to select the current reincarnation session.
-
-## Session Details
-- Session name: `{session_name}`
-- Working directory: `{AIM_ROOT}`
-- Agent type: opencode (interactive TUI)
-"""
-        with open(connect_path, "w") as f:
-            f.write(instructions)
-
         print(f"""
 [!] Reincarnation complete. The new agent is alive in tmux session: {session_name}
 
@@ -193,8 +164,6 @@ To connect, choose one of the following:
   Option B (if opencode needs session selection):
     tmux attach-session -t {session_name}
     /session
-
-Full instructions saved to: {connect_path}
 """)
 
 if __name__ == "__main__":
